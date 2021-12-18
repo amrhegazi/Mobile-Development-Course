@@ -1,22 +1,24 @@
 import 'package:flutter/material.dart';
 import 'bar.dart';
-class categories extends StatelessWidget {
 
+class categories extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: startDrawer(),
       appBar: BaseAppBar(
         backgroundColor: Colors.blue,
-          title: Text('title 2 kareem'),
-          appBar: AppBar(),
-          widgets: <Widget>[Icon(Icons.arrow_back)],
-          ),
+        title: Text('title 2 kareemm'),
+        appBar: AppBar(),
+      ),
       body: SafeArea(
         child: ElevatedButton(
-          onPressed: (){Navigator.pushNamed(context, '/');},
+          onPressed: () {
+            Navigator.pushNamed(context, '/');
+          },
           child: Text('home'),
-          ),
-          ),
+        ),
+      ),
     );
   }
 }

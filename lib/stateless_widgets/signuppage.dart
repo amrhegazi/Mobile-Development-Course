@@ -8,7 +8,7 @@ class signuppage extends StatefulWidget {
 class _State extends State<signuppage> {
   TextEditingController nameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-
+  TextEditingController confirmPasswordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,7 +51,7 @@ class _State extends State<signuppage> {
                   padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
                   child: TextField(
                     obscureText: true,
-                    controller: passwordController,
+                    controller: confirmPasswordController,
                     decoration: InputDecoration(
                       border: OutlineInputBorder(),
                       labelText: 'Confirm Password',
@@ -68,6 +68,7 @@ class _State extends State<signuppage> {
                       onPressed: () {
                         print(nameController.text);
                         print(passwordController.text);
+                        print(confirmPasswordController.text);
                         Navigator.pushNamed(context, '/login');
                       },
                     )),

@@ -9,6 +9,8 @@ class _State extends State<loginpage> {
   TextEditingController nameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
+  String? _password;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,21 +40,14 @@ class _State extends State<loginpage> {
                 ),
                 Container(
                   padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
-                  child: TextField(
-                    obscureText: true,
-                    controller: passwordController,
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: 'Password',
-                    ),
+                  child: PasswordField(
+                    labelText: 'Password *',
+                    onFieldSubmitted: (String value) {
+                      setState(() {
+                        this._password = value;
+                      });
+                    },
                   ),
-                ),
-                FlatButton(
-                  onPressed: () {
-                    //forgot password screen
-                  },
-                  textColor: Colors.blue,
-                  child: Text('Forgot Password'),
                 ),
                 Container(
                     height: 50,
@@ -87,5 +82,43 @@ class _State extends State<loginpage> {
                 ))
               ],
             )));
+  }
+}
+
+class PasswordField extends StatefulWidget {
+  const PasswordField({
+    this.labelText,
+    this.onFieldSubmitted,
+  });
+
+  final String? labelText;
+  final ValueChanged<String>? onFieldSubmitted;
+
+  @override
+  _PasswordFieldState createState() => _PasswordFieldState();
+}
+
+class _PasswordFieldState extends State<PasswordField> {
+  bool _obscureText = true;
+
+  @override
+  Widget build(BuildContext context) {
+    return TextFormField(
+      obscureText: _obscureText,
+      onFieldSubmitted: widget.onFieldSubmitted,
+      decoration: InputDecoration(
+        border: const UnderlineInputBorder(),
+        filled: true,
+        labelText: widget.labelText,
+        suffixIcon: GestureDetector(
+          onTap: () {
+            setState(() {
+              _obscureText = !_obscureText;
+            });
+          },
+          child: Icon(_obscureText ? Icons.visibility : Icons.visibility_off),
+        ),
+      ),
+    );
   }
 }
